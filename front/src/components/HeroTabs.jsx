@@ -30,7 +30,7 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
     intervalRef.current = setInterval(() => {
       setDirection(1);
       setActiveIndex((prev) => (prev + 1) % data.length);
-    }, 6000);
+    }, 8500);
   }, [data.length, setActiveIndex]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
 
   useEffect(() => {
     if (!backgroundVideoRef.current) return;
-    backgroundVideoRef.current.playbackRate = 0.5;
+    backgroundVideoRef.current.playbackRate = 0.4;
   }, [activeIndex]);
 
   const handleTabClick = (index) => {
@@ -76,7 +76,7 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
       <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-accent-pink/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Tabs */}
-      <div className="relative z-10 flex justify-center pt-6">
+      <div className="relative z-10 flex justify-center pt-4 md:pt-6 px-3">
         <div className="flex gap-1 p-1 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
           {data.map((item, index) => {
             const Icon = item.icon;
@@ -85,18 +85,18 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
               <button
                 key={item.id}
                 onClick={() => handleTabClick(index)}
-                className={`relative flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300
+                className={`relative flex items-center gap-1.5 md:gap-2 px-3 md:px-5 py-2 md:py-2.5 rounded-xl text-xs md:text-sm font-medium transition-all duration-300
                   ${isActive ? 'text-white' : 'text-white/60 hover:text-white/80'}`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="hero-tab"
                     className={`absolute inset-0 bg-linear-to-r ${theme.gradient} rounded-xl shadow-lg`}
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 32 }}
                   />
                 )}
                 <span className="relative flex items-center gap-2">
-                  <Icon size={16} />
+                  <Icon size={14} className="md:w-4 md:h-4" />
                   {item.tab}
                 </span>
               </button>
@@ -106,7 +106,7 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
       </div>
 
       {/* Hero content */}
-      <div className="relative z-10 flex items-center min-h-[calc(100vh-80px)] pl-20 md:pl-28 pr-6 md:pr-16">
+      <div className="relative z-10 flex items-center min-h-[calc(100vh-80px)] pl-6 sm:pl-10 md:pl-28 pr-4 sm:pr-6 md:pr-16">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={active.id}
@@ -115,7 +115,7 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 30 }}
             className="max-w-2xl"
           >
             {/* Badge */}
@@ -144,7 +144,7 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className={`text-5xl md:text-7xl font-bold mb-2 ${theme.text}`}
+              className={`text-4xl sm:text-5xl md:text-7xl font-bold mb-2 ${theme.text}`}
             >
               {active.hero.name}
             </motion.h1>
@@ -154,7 +154,7 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 }}
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6"
             >
               <span className={`bg-linear-to-r ${theme.gradient} bg-clip-text text-transparent`}>
                 {active.hero.title}{' '}
