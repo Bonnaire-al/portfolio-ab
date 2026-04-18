@@ -9,6 +9,7 @@ const homeData = [
     id: 'dev',
     tab: 'Dev Junior',
     icon: HiCodeBracket,
+    video: '/Video-fond-dev.mp4',
     theme: {
       bg: 'bg-surface-dark',
       text: 'text-text-light',
@@ -50,6 +51,7 @@ const homeData = [
     id: 'electricien',
     tab: 'Électricien',
     icon: HiBolt,
+    video: '/Video-fond-electricien.mp4',
     theme: {
       bg: 'bg-linear-to-br from-amber-950 via-orange-950 to-yellow-950',
       text: 'text-amber-50',
@@ -91,6 +93,7 @@ const homeData = [
     id: 'commerce',
     tab: 'Employé de commerce',
     icon: HiBuildingStorefront,
+    video: '/Video-fond-commerce.mp4',
     theme: {
       bg: 'bg-linear-to-br from-emerald-950 via-teal-950 to-cyan-950',
       text: 'text-emerald-50',

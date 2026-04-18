@@ -23,6 +23,7 @@ const slideVariants = {
 export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
   const [direction, setDirection] = useState(0);
   const intervalRef = useRef(null);
+  const backgroundVideoRef = useRef(null);
 
   const startAutoplay = useCallback(() => {
     clearInterval(intervalRef.current);
@@ -37,6 +38,11 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
     return () => clearInterval(intervalRef.current);
   }, [startAutoplay]);
 
+  useEffect(() => {
+    if (!backgroundVideoRef.current) return;
+    backgroundVideoRef.current.playbackRate = 0.5;
+  }, [activeIndex]);
+
   const handleTabClick = (index) => {
     setDirection(index > activeIndex ? 1 : -1);
     setActiveIndex(index);
@@ -48,6 +54,22 @@ export default function HeroTabs({ data, activeIndex, setActiveIndex }) {
 
   return (
     <div className={`relative min-h-screen ${theme.bg} transition-colors duration-700 overflow-hidden`}>
+      {active.video && (
+        <video
+          key={active.id}
+          ref={backgroundVideoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        >
+          <source src={active.video} type="video/mp4" />
+        </video>
+      )}
+
+      <div className="absolute inset-0 bg-black/45 pointer-events-none" />
+
       {/* Ambient glow */}
       <div className={`absolute inset-0 bg-linear-to-br ${theme.gradient} opacity-10 pointer-events-none`} />
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
